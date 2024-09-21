@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package vip.fastgo.protocol;
+
+message ProtocolMessage {
+  enum CmdType {
+    LOGIN = 0;
+    LOGOUT = 1;
+    REG = 2;
+  }
+
+  CmdType cmd = 1;
+
+  oneof data {
+    LoginData login = 2;
+    RegData reg = 3;
+  }
+}
+
+message Heartbeat {}
+
+message LoginData {
+  string user = 1;
+  string pwd = 2;
+}
+
+message RegData {
+  string user = 1;
+  string pwd = 2;
+}
+
