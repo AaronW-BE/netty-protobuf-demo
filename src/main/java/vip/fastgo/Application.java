@@ -31,8 +31,11 @@ public class Application {
             protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                 ChannelPipeline pipeline = nioSocketChannel.pipeline();
 
+                // Decoder
                 pipeline.addLast(new ProtobufVarint32FrameDecoder());
                 pipeline.addLast(new ProtobufDecoder(ProtocolMessageOuterClass.ProtocolMessage.getDefaultInstance()));
+
+                // Encoder
                 pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
                 pipeline.addLast(new ProtobufEncoder());
 
